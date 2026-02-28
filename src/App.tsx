@@ -1,67 +1,32 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import { ProgressSidebar } from "./components/Layout/ProgressSidebar";
-import { SECTIONS, type SectionId } from "./utils/constants";
-import { Section1_WhatIsProbability } from "./sections/Section1_WhatIsProbability";
-import { Section2_Frequentist } from "./sections/Section2_Frequentist";
-import { Section3_EnterBayes } from "./sections/Section3_EnterBayes";
-import { Section4_CoinTrial } from "./sections/Section4_CoinTrial";
-import { Section5_WhyItMatters } from "./sections/Section5_WhyItMatters";
+import { TopNav, type PageId } from "./components/Navigation/TopNav";
+import { BayesianPage } from "./pages/BayesianPage";
+import { OptimizationPage } from "./pages/OptimizationPage";
+
+function getPageFromHash(): PageId {
+  return window.location.hash === "#optimization" ? "optimization" : "bayesian";
+}
 
 function App() {
-  const [activeSection, setActiveSection] = useState<SectionId>(SECTIONS[0].id);
+  const [page, setPage] = useState<PageId>(getPageFromHash);
 
-  // Track active section with IntersectionObserver
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id as SectionId);
-          }
-        }
-      },
-      { rootMargin: "-40% 0px -40% 0px" }
-    );
-
-    for (const section of SECTIONS) {
-      const el = document.getElementById(section.id);
-      if (el) observer.observe(el);
-    }
-
-    return () => observer.disconnect();
+    const onHash = () => setPage(getPageFromHash());
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  const handleNavigate = useCallback((sectionId: string) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleNavigate = useCallback((p: PageId) => {
+    window.location.hash = p === "optimization" ? "#optimization" : "";
+    setPage(p);
+    window.scrollTo({ top: 0 });
   }, []);
 
   return (
     <div className="app">
-      <ProgressSidebar
-        activeSection={activeSection}
-        onNavigate={handleNavigate}
-      />
-      <main className="mainContent">
-        <div className="hero">
-          <h1 className="heroTitle">
-            <span className="heroAccent">Bayesian</span> Thinking
-          </h1>
-          <p className="heroSubtitle">
-            An interactive exploration of Bayes' theorem, Bayesian statistics,
-            and how they compare to frequentist methods.
-          </p>
-        </div>
-
-        <Section1_WhatIsProbability />
-        <Section2_Frequentist />
-        <Section3_EnterBayes />
-        <Section4_CoinTrial />
-        <Section5_WhyItMatters />
-      </main>
+      <TopNav activePage={page} onNavigate={handleNavigate} />
+      {page === "bayesian" ? <BayesianPage /> : <OptimizationPage />}
     </div>
   );
 }

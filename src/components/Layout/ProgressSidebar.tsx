@@ -1,17 +1,23 @@
-import { SECTIONS } from "../../utils/constants";
 import styles from "./Layout.module.css";
 
+interface Section {
+  readonly id: string;
+  readonly title: string;
+  readonly number: number;
+}
+
 interface Props {
+  sections: readonly Section[];
   activeSection: string;
   onNavigate: (sectionId: string) => void;
 }
 
-export function ProgressSidebar({ activeSection, onNavigate }: Props) {
-  const activeIndex = SECTIONS.findIndex((s) => s.id === activeSection);
+export function ProgressSidebar({ sections, activeSection, onNavigate }: Props) {
+  const activeIndex = sections.findIndex((s) => s.id === activeSection);
 
   return (
     <nav className={styles.sidebar} aria-label="Section navigation">
-      {SECTIONS.map((section, i) => (
+      {sections.map((section, i) => (
         <button
           key={section.id}
           className={`${styles.dot} ${
