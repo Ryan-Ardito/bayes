@@ -1,0 +1,135 @@
+.appLayout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #475569;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dot:hover {
+  border-color: #a855f7;
+  transform: scale(1.2);
+}
+
+.dotActive {
+  background: #a855f7;
+  border-color: #a855f7;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+.dotCompleted {
+  background: #475569;
+  border-color: #475569;
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 60px;
+  padding: 0 24px;
+  max-width: 800px;
+  margin-left: 60px;
+  margin-right: auto;
+  padding-left: calc((100vw - 60px - 800px) / 2);
+}
+
+@media (max-width: 960px) {
+  .mainContent {
+    padding-left: 24px;
+    max-width: 100%;
+  }
+}
+
+.sectionCard {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+  transition: border-color 0.3s ease;
+}
+
+.sectionCard:hover {
+  border-color: #475569;
+}
+
+.sectionHeader {
+  padding: 80px 0 40px;
+}
+
+.sectionNumber {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a855f7;
+  margin-bottom: 8px;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.insightBox {
+  background: rgba(251, 191, 36, 0.08);
+  border-left: 3px solid #fbbf24;
+  border-radius: 0 12px 12px 0;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+
+.insightBox p {
+  margin: 0;
+  color: #fde68a;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.insightLabel {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #fbbf24;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    display: none;
+  }
+  .mainContent {
+    margin-left: 0;
+    padding: 0 16px;
+  }
+  .sectionCard {
+    padding: 20px;
+  }
+}

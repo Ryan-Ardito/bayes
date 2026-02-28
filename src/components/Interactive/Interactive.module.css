@@ -1,0 +1,418 @@
+/* Coin Flipper */
+.coinContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.coin {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  transform-style: preserve-3d;
+  user-select: none;
+  border: 3px solid;
+}
+
+.coinHeads {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-color: #d97706;
+  color: #78350f;
+}
+
+.coinTails {
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+  border-color: #475569;
+  color: #1e293b;
+}
+
+.coinFlipping {
+  animation: coinFlip 0.4s ease-out;
+}
+
+@keyframes coinFlip {
+  0% { transform: rotateY(0deg) scale(1); }
+  50% { transform: rotateY(900deg) scale(1.1); }
+  100% { transform: rotateY(1800deg) scale(1); }
+}
+
+.coinButtons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tally {
+  display: flex;
+  gap: 32px;
+  font-size: 18px;
+  color: #e2e8f0;
+}
+
+.tallyItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tallyDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.tallyHeads {
+  background: #fbbf24;
+}
+
+.tallyTails {
+  background: #94a3b8;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #475569;
+  background: #334155;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: #475569;
+  border-color: #64748b;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btnPrimary {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: white;
+}
+
+.btnPrimary:hover {
+  background: #4f46e5;
+}
+
+.btnSmall {
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+.btnDanger {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.btnDanger:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* Chart container */
+.chartContainer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.chartSvg {
+  width: 100%;
+  height: auto;
+}
+
+/* Slider */
+.sliderGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.sliderLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.sliderLabelValue {
+  color: #e2e8f0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #334155;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #a855f7;
+  cursor: pointer;
+  border: 2px solid #c084fc;
+  transition: transform 0.15s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #a855f7;
+  cursor: pointer;
+  border: 2px solid #c084fc;
+}
+
+/* Comparison Panel */
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparisonPanel {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+}
+
+.comparisonPanelFreq {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.comparisonPanelBayes {
+  background: rgba(245, 158, 11, 0.06);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.panelTitleFreq {
+  color: #10b981;
+}
+
+.panelTitleBayes {
+  color: #f59e0b;
+}
+
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.statRow:last-child {
+  border-bottom: none;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.statValue {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e2e8f0;
+  font-variant-numeric: tabular-nums;
+}
+
+.verdict {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.verdictFreq {
+  background: rgba(16, 185, 129, 0.1);
+  color: #6ee7b7;
+}
+
+.verdictBayes {
+  background: rgba(245, 158, 11, 0.1);
+  color: #fde68a;
+}
+
+/* Prior selector radio buttons */
+.priorOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.priorOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #e2e8f0;
+  font-size: 14px;
+  text-align: left;
+  width: 100%;
+}
+
+.priorOption:hover {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.06);
+}
+
+.priorOptionActive {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.priorDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.priorDotActive {
+  border-color: #6366f1;
+}
+
+.priorDotInner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6366f1;
+}
+
+/* Disease Test Demo */
+.diseaseGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .diseaseGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.diseaseResult {
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  text-align: center;
+}
+
+.diseaseResultValue {
+  font-size: 48px;
+  font-weight: 700;
+  color: #f59e0b;
+  font-variant-numeric: tabular-nums;
+}
+
+.diseaseResultLabel {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+/* Formula */
+.formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 20px;
+  padding: 24px 16px;
+  flex-wrap: wrap;
+}
+
+.formulaFraction {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.formulaNumerator {
+  padding-bottom: 4px;
+  border-bottom: 2px solid currentColor;
+}
+
+.formulaDenominator {
+  padding-top: 4px;
+}
+
+.formulaColor {
+  font-weight: 600;
+}
+
+/* Proportion chart */
+.proportionLine {
+  fill: none;
+  stroke: #10b981;
+  stroke-width: 2;
+}
+
+.refLine {
+  stroke: #475569;
+  stroke-dasharray: 6 4;
+  stroke-width: 1;
+}
+
+.ciArea {
+  fill: rgba(16, 185, 129, 0.15);
+}
